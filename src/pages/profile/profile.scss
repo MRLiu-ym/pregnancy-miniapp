@@ -2,7 +2,7 @@
 
 /* 标签页 */
 .tabs { display:flex; background:#fff; border-radius:16px; padding:6px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
-.tab { flex:1; text-align:center; padding:16px; border-radius:12px; font-size:26px; color:#999; transition:all 0.2s; }
+.tab { flex:1; text-align:center; padding:16px; border-radius:12px; font-size:26px; color:#999; }
 .tab.active { background:#FCE4EC; color:#DB2777; font-weight:bold; }
 
 /* 卡片 */
@@ -17,9 +17,27 @@
 .row-value { font-size:26px; color:#333; font-weight:500; }
 .row-value.hl { color:#DB2777; font-weight:bold; }
 
-/* 表单字段 - 修复重叠问题 */
+/* 表单字段 - 修复重叠 */
 .field { margin-bottom:24px; }
 .field-label { font-size:26px; color:#666; display:block; margin-bottom:12px; font-weight:500; }
+
+/* 输入框容器 - 用 View 包裹解决 Input 样式问题 */
+.input-wrap { 
+  background:#f5f5f5; 
+  border-radius:16px; 
+  padding:20px 24px;
+  min-height:80px;
+  display:flex;
+  align-items:center;
+}
+.input-field { 
+  font-size:28px; 
+  width:100%; 
+  color:#333;
+  line-height:40px;
+}
+
+/* 普通 Input（非表单字段） */
 .input { 
   background:#f5f5f5; 
   border-radius:16px; 
@@ -28,11 +46,11 @@
   width:100%; 
   box-sizing:border-box; 
   border:none;
-  height:80px;
+  min-height:80px;
   line-height:40px;
   color:#333;
+  margin-bottom:16px;
 }
-.input::placeholder { color:#ccc; }
 
 /* 按钮 */
 .btn { 
@@ -54,7 +72,6 @@
   padding:24px; 
   border-radius:24px; 
   font-size:30px; 
-  font-weight:500; 
 }
 
 /* 健康数据类型按钮 */
@@ -68,7 +85,6 @@
   font-size:24px; 
   color:#999; 
   font-weight:500;
-  transition:all 0.2s;
 }
 .type-btn.active { 
   background:linear-gradient(135deg, #FCE4EC, #FDF2F8); 
