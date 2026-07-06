@@ -1,0 +1,27 @@
+export default {
+  pages: [
+    'pages/index/index',
+    'pages/profile/profile',
+    'pages/reminders/reminders',
+    'pages/chat/chat',
+    'pages/charts/charts',
+  ],
+  window: {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#F472B6',
+    navigationBarTitleText: '孕期智能助手',
+    navigationBarTextStyle: 'white',
+  },
+  tabBar: {
+    color: '#999999',
+    selectedColor: '#F472B6',
+    backgroundColor: '#ffffff',
+    borderStyle: 'white',
+    list: [
+      { pagePath: 'pages/index/index', text: '首页' },
+      { pagePath: 'pages/reminders/reminders', text: '提醒' },
+      { pagePath: 'pages/chat/chat', text: 'AI咨询' },
+      { pagePath: 'pages/profile/profile', text: '档案' },
+    ],
+  },
+};

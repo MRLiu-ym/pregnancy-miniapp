@@ -1,0 +1,63 @@
+.page { padding:24px; padding-bottom:120px; background:#f8f8f8; min-height:100vh; }
+.scroll { height:100%; }
+.empty { display:flex; align-items:center; justify-content:center; height:60vh; color:#ccc; font-size:28px; }
+
+/* 提醒卡片 - 优化间距和层次感 */
+.reminder-card { 
+  border-radius:24px; 
+  padding:28px; 
+  margin-bottom:20px; 
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+}
+.reminder-card.urgent { 
+  background:linear-gradient(135deg, #FEF2F2, #fff); 
+  border:1px solid #FECACA; 
+}
+.reminder-card.high { 
+  background:linear-gradient(135deg, #FFFBEB, #fff); 
+  border:1px solid #FDE68A; 
+}
+.reminder-card.normal { 
+  background:linear-gradient(135deg, #F0F9FF, #fff); 
+  border:1px solid #BAE6FD; 
+}
+.reminder-top { 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  margin-bottom:16px; 
+}
+.reminder-type { 
+  font-size:24px; 
+  color:#999; 
+  font-weight:500; 
+}
+.reminder-pri { 
+  font-size:20px; 
+  padding:4px 14px; 
+  border-radius:12px; 
+  font-weight:600; 
+}
+.reminder-pri.urgent { background:#FEE2E2; color:#DC2626; }
+.reminder-pri.high { background:#FEF3C7; color:#D97706; }
+.reminder-pri.normal { background:#DBEAFE; color:#2563EB; }
+.reminder-title { 
+  font-size:30px; 
+  font-weight:bold; 
+  color:#333; 
+  display:block; 
+  margin-bottom:10px; 
+}
+.reminder-desc { 
+  font-size:26px; 
+  color:#666; 
+  display:block; 
+  line-height:1.6; 
+}
+.reminder-time { 
+  font-size:22px; 
+  color:#999; 
+  display:block; 
+  margin-top:12px; 
+  font-weight:500;
+}

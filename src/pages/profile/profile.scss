@@ -1,0 +1,120 @@
+.page { padding:24px; padding-bottom:120px; background:#f8f8f8; min-height:100vh; }
+
+/* 标签页 */
+.tabs { display:flex; background:#fff; border-radius:16px; padding:6px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+.tab { flex:1; text-align:center; padding:16px; border-radius:12px; font-size:26px; color:#999; transition:all 0.2s; }
+.tab.active { background:#FCE4EC; color:#DB2777; font-weight:bold; }
+
+/* 卡片 */
+.card { background:#fff; border-radius:24px; padding:28px; margin-bottom:24px; box-shadow:0 2px 12px rgba(0,0,0,0.04); }
+.card-title-row { margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #f5f5f5; }
+.card-title-row text { font-size:30px; font-weight:bold; color:#333; }
+
+/* 信息展示行 */
+.row { display:flex; justify-content:space-between; align-items:center; padding:20px 0; border-bottom:1px solid #f8f8f8; }
+.row:last-child { border-bottom:none; }
+.row-label { font-size:26px; color:#999; }
+.row-value { font-size:26px; color:#333; font-weight:500; }
+.row-value.hl { color:#DB2777; font-weight:bold; }
+
+/* 表单字段 - 修复重叠问题 */
+.field { margin-bottom:24px; }
+.field-label { font-size:26px; color:#666; display:block; margin-bottom:12px; font-weight:500; }
+.input { 
+  background:#f5f5f5; 
+  border-radius:16px; 
+  padding:20px 24px; 
+  font-size:28px; 
+  width:100%; 
+  box-sizing:border-box; 
+  border:none;
+  height:80px;
+  line-height:40px;
+  color:#333;
+}
+.input::placeholder { color:#ccc; }
+
+/* 按钮 */
+.btn { 
+  background:linear-gradient(135deg, #F472B6, #EC4899); 
+  color:#fff; 
+  text-align:center; 
+  padding:24px; 
+  border-radius:24px; 
+  font-size:30px; 
+  font-weight:bold;
+  box-shadow:0 4px 16px rgba(244,114,182,0.3);
+  margin-top:16px;
+}
+.btn-cancel { 
+  flex:1; 
+  background:#f5f5f5; 
+  color:#666; 
+  text-align:center; 
+  padding:24px; 
+  border-radius:24px; 
+  font-size:30px; 
+  font-weight:500; 
+}
+
+/* 健康数据类型按钮 */
+.type-btns { display:flex; gap:12px; margin-bottom:20px; }
+.type-btn { 
+  flex:1; 
+  text-align:center; 
+  padding:16px; 
+  border-radius:12px; 
+  background:#f5f5f5; 
+  font-size:24px; 
+  color:#999; 
+  font-weight:500;
+  transition:all 0.2s;
+}
+.type-btn.active { 
+  background:linear-gradient(135deg, #FCE4EC, #FDF2F8); 
+  color:#DB2777; 
+  font-weight:bold;
+  box-shadow:0 2px 8px rgba(244,114,182,0.15);
+}
+
+/* 记录列表 */
+.record-row { 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center;
+  padding:18px 0; 
+  border-bottom:1px solid #f8f8f8; 
+}
+.record-date { font-size:24px; color:#999; }
+.record-val { font-size:28px; color:#333; font-weight:bold; }
+
+/* 产检时间线 */
+.checkup-item { 
+  display:flex; 
+  align-items:flex-start; 
+  gap:16px; 
+  padding:20px 0; 
+  border-bottom:1px solid #f8f8f8;
+}
+.checkup-item:last-child { border-bottom:none; }
+.dot { 
+  width:14px; 
+  height:14px; 
+  border-radius:50%; 
+  background:linear-gradient(135deg, #F472B6, #EC4899); 
+  margin-top:8px; 
+  flex-shrink:0;
+  box-shadow:0 2px 6px rgba(244,114,182,0.3);
+}
+.checkup-name { font-size:28px; font-weight:bold; color:#333; display:block; }
+.checkup-info { font-size:24px; color:#999; display:block; margin-top:6px; }
+
+/* 空状态 */
+.empty { 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  height:60vh; 
+  color:#ccc; 
+  font-size:28px; 
+}
