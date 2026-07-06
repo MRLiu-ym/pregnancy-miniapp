@@ -161,7 +161,7 @@ export default function Profile() {
   );
 }
 
-function Row({ label, value, hl }: { label; value; hl? }) {
+function Row({ label, value, hl }) {
   return (
     <View className="row">
       <Text className="row-label">{label}</Text>
@@ -170,11 +170,13 @@ function Row({ label, value, hl }: { label; value; hl? }) {
   );
 }
 
-function Field({ label, value, onChange, type = 'text' }: { label; value; onChange: (v) => void; type? }) {
+function Field({ label, value, onChange, type = 'text' }) {
   return (
     <View className="field">
       <Text className="field-label">{label}</Text>
-      <Input className="input" type={type} value={value} onInput={e => onChange(e.detail.value)} />
+      <View className="input-wrap">
+        <Input className="input-field" type={type} value={value} onInput={e => onChange(e.detail.value)} />
+      </View>
     </View>
   );
 }
