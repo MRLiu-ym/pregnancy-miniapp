@@ -1,0 +1,72 @@
+.guide-page { display:flex; flex-direction:column; height:100vh; background:#f8f8f8; }
+
+/* 顶部 */
+.guide-header {
+  background:linear-gradient(135deg, #F472B6, #EC4899);
+  padding:28px 28px 24px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.guide-week-badge {
+  width:80px; height:80px; border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  border:3px solid rgba(255,255,255,0.3);
+  flex-shrink:0;
+}
+.guide-week-num { font-size:36px; font-weight:bold; color:#fff; line-height:1; }
+.guide-week-label { font-size:18px; color:rgba(255,255,255,0.7); }
+.guide-header-info { flex:1; }
+.guide-stage { font-size:22px; color:rgba(255,255,255,0.8); display:block; }
+.guide-summary { font-size:26px; color:#fff; font-weight:600; display:block; margin-top:4px; line-height:1.4; }
+
+/* 标签栏 */
+.tab-scroll { background:#fff; border-bottom:1px solid #f0f0f0; white-space:nowrap; }
+.tab-list { display:inline-flex; gap:4px; padding:12px 16px; }
+.guide-tab {
+  display:inline-flex; padding:10px 18px; border-radius:20px;
+  background:#f5f5f5; font-size:24px; color:#666; white-space:nowrap;
+}
+.guide-tab.active { background:#FCE4EC; color:#DB2777; font-weight:600; }
+
+/* 内容 */
+.content-scroll { flex:1; padding:16px; }
+.content-card { background:#fff; border-radius:20px; padding:24px; }
+
+.content-list { display:flex; flex-direction:column; gap:14px; }
+.content-item { display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border-radius:14px; }
+.content-item.do { background:#F0FDF4; }
+.content-item.dont { background:#FEF2F2; }
+.content-item.info { background:#F8FAFC; }
+.content-item.baby { background:#FFF7ED; }
+.content-item.nutrition-item { background:#F0FDF4; }
+.content-item.husband { background:#EFF6FF; }
+.content-item.family { background:#FDF2F8; }
+.content-item.shopping-item { background:#FFFBE6; }
+.item-bullet { font-size:24px; flex-shrink:0; }
+.item-text { font-size:26px; color:#333; line-height:1.5; flex:1; }
+
+/* 菜谱 */
+.recipe-list { display:flex; flex-direction:column; gap:14px; }
+.recipe-card { background:#FFF7ED; border-radius:16px; padding:20px; }
+.recipe-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.recipe-meal { font-size:22px; color:#999; }
+.thyroid-tag { font-size:20px; background:#FCE4EC; color:#DB2777; padding:4px 10px; border-radius:10px; }
+.recipe-name { font-size:28px; color:#333; font-weight:600; display:block; margin-bottom:6px; }
+.recipe-desc { font-size:24px; color:#666; display:block; }
+
+/* 甲减提醒 */
+.thyroid-card { background:#FFF5F5; border:1px solid #FECACA; border-radius:20px; padding:24px; margin-top:16px; }
+.thyroid-title-row { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.thyroid-icon { font-size:28px; }
+.thyroid-title { font-size:28px; font-weight:bold; color:#DC2626; }
+.thyroid-text { font-size:26px; color:#555; line-height:1.7; }
+
+/* 空状态 */
+.empty-page { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; padding:60px; text-align:center; }
+.empty-icon { font-size:64px; margin-bottom:20px; }
+.empty-title { font-size:32px; font-weight:bold; color:#333; margin-bottom:12px; }
+.empty-desc { font-size:26px; color:#999; line-height:1.5; margin-bottom:30px; white-space:pre-line; }
+.btn { background:linear-gradient(135deg, #F472B6, #EC4899); color:#fff; padding:20px 48px; border-radius:32px; font-size:28px; font-weight:bold; display:inline-block; }

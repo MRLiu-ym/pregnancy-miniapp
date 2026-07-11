@@ -83,37 +83,60 @@ export default function Index() {
       </View>
 
       {/* 快捷操作 */}
-      <View className="grid-3">
-        <View className="quick-btn" onClick={() => Taro.switchTab({ url: '/pages/profile/profile' })}>
-          <Text className="quick-icon">⚖️</Text><Text className="quick-label">记录体重</Text>
+      <View className="card">
+        <Text className="card-title">快捷操作</Text>
+        <View className="grid-4">
+          <View className="quick-btn" onClick={function() { Taro.navigateTo({ url: '/pages/guide/guide' }); }}>
+            <Text className="quick-icon">📅</Text>
+            <Text className="quick-label">每周指南</Text>
+          </View>
+          <View className="quick-btn" onClick={function() { Taro.navigateTo({ url: '/pages/review/review' }); }}>
+            <Text className="quick-icon">📊</Text>
+            <Text className="quick-label">健康报告</Text>
+          </View>
+          <View className="quick-btn" onClick={function() { Taro.navigateTo({ url: '/pages/family/family' }); }}>
+            <Text className="quick-icon">👨‍👩‍👧</Text>
+            <Text className="quick-label">家人指南</Text>
+          </View>
+          <View className="quick-btn" onClick={function() { Taro.navigateTo({ url: '/pages/knowledge/knowledge' }); }}>
+            <Text className="quick-icon">📚</Text>
+            <Text className="quick-label">孕期百科</Text>
+          </View>
+          <View className="quick-btn" onClick={function() { Taro.switchTab({ url: '/pages/chat/chat' }); }}>
+            <Text className="quick-icon">💬</Text>
+            <Text className="quick-label">AI咨询</Text>
+          </View>
+          <View className="quick-btn" onClick={function() { Taro.switchTab({ url: '/pages/profile/profile' }); }}>
+            <Text className="quick-icon">📝</Text>
+            <Text className="quick-label">健康档案</Text>
+          </View>
         </View>
-        <View className="quick-btn" onClick={() => Taro.switchTab({ url: '/pages/profile/profile' })}>
-          <Text className="quick-icon">💊</Text><Text className="quick-label">记录用药</Text>
+      </View>
+
+      {/* 今日丈夫任务 */}
+      <View className="card husband-card">
+        <View className="card-header-row">
+          <Text className="card-title">👨 丈夫今日任务</Text>
+          <Text className="link" onClick={function() { Taro.navigateTo({ url: '/pages/family/family' }); }}>更多</Text>
         </View>
-        <View className="quick-btn" onClick={() => Taro.switchTab({ url: '/pages/profile/profile' })}>
-          <Text className="quick-icon">🧪</Text><Text className="quick-label">记录TSH</Text>
-        </View>
-        <View className="quick-btn" onClick={() => Taro.switchTab({ url: '/pages/chat/chat' })}>
-          <Text className="quick-icon">💬</Text><Text className="quick-label">AI咨询</Text>
-        </View>
-        <View className="quick-btn" onClick={() => Taro.switchTab({ url: '/pages/charts/charts' })}>
-          <Text className="quick-icon">📊</Text><Text className="quick-label">数据图表</Text>
-        </View>
-        <View className="quick-btn" onClick={() => Taro.switchTab({ url: '/pages/reminders/reminders' })}>
-          <Text className="quick-icon">🔔</Text><Text className="quick-label">提醒列表</Text>
-        </View>
+        <View className="reminder-item"><Text>💊 提醒妻子按时服用优甲乐</Text></View>
+        <View className="reminder-item"><Text>🍳 准备健康早餐（服药后30-60分钟吃）</Text></View>
+        <View className="reminder-item"><Text>❤️ 多倾听、多拥抱、少讲道理</Text></View>
       </View>
 
       {/* 今日提醒 */}
       <View className="card">
         <View className="card-header-row">
           <Text className="card-title">今日提醒</Text>
-          <Text className="link" onClick={() => Taro.switchTab({ url: '/pages/reminders/reminders' })}>查看全部</Text>
+          <Text className="link" onClick={function() { Taro.switchTab({ url: '/pages/reminders/reminders' }); }}>查看全部</Text>
         </View>
         <View className="reminder-item"><Text>💊 优甲乐 {profile.thyroidDosageMcg}μg 空腹服用</Text></View>
         <View className="reminder-item"><Text>🍃 叶酸 400μg 补充</Text></View>
         {pregnancy.currentWeek <= 12 && (
           <View className="reminder-item"><Text>⚠️ 避免剧烈运动和重物提举</Text></View>
+        )}
+        {pregnancy.currentWeek >= 28 && (
+          <View className="reminder-item"><Text>👶 每天数胎动，固定时间记录</Text></View>
         )}
       </View>
     </View>

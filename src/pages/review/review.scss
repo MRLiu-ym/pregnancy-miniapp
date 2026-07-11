@@ -1,0 +1,47 @@
+.page { display:flex; flex-direction:column; height:100vh; background:#f8f8f8; }
+.scroll { flex:1; padding:16px; }
+
+.empty-page { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; padding:60px; text-align:center; }
+.empty-icon { font-size:64px; margin-bottom:20px; }
+.empty-title { font-size:32px; font-weight:bold; color:#333; margin-bottom:12px; }
+.empty-desc { font-size:26px; color:#999; line-height:1.5; white-space:pre-line; }
+
+/* 总体评估 */
+.summary-card { border-radius:20px; padding:24px; margin-bottom:16px; }
+.summary-card.good { background:#F0FDF4; border:1px solid #BBF7D0; }
+.summary-card.warn { background:#FFF5F5; border:1px solid #FECACA; }
+.summary-title { font-size:28px; font-weight:bold; color:#333; display:block; margin-bottom:10px; }
+.summary-text { font-size:26px; color:#555; line-height:1.6; display:block; }
+
+/* 卡片 */
+.card { background:#fff; border-radius:20px; padding:24px; margin-bottom:16px; }
+.card-title-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.card-title { font-size:28px; font-weight:bold; color:#333; display:block; margin-bottom:16px; }
+
+.status-badge { font-size:22px; padding:6px 14px; border-radius:14px; font-weight:600; }
+.status-badge.good { background:#DCFCE7; color:#16A34A; }
+.status-badge.warn { background:#FEE2E2; color:#DC2626; }
+
+.data-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f9f9f9; }
+.data-label { font-size:26px; color:#999; }
+.data-value { font-size:26px; color:#333; font-weight:500; }
+.data-value.bold { font-weight:bold; }
+.data-value.gray { color:#999; font-weight:normal; }
+.data-value.green { color:#16A34A; font-weight:bold; }
+.data-value.red { color:#DC2626; font-weight:bold; }
+
+.analysis-box { background:#F8FAFC; border-radius:14px; padding:18px; margin-top:14px; }
+.analysis-box.hint { background:#FFF7ED; }
+.analysis-text { font-size:24px; color:#555; line-height:1.6; }
+
+/* 统计 */
+.stats-row { display:flex; gap:16px; }
+.stat-item { flex:1; background:#F8FAFC; border-radius:14px; padding:20px; text-align:center; }
+.stat-num { font-size:40px; font-weight:bold; color:#F472B6; display:block; }
+.stat-label { font-size:22px; color:#999; display:block; margin-top:6px; }
+
+/* 建议 */
+.tips-list { display:flex; flex-direction:column; gap:12px; }
+.tip-item { display:flex; gap:12px; align-items:flex-start; }
+.tip-icon { font-size:24px; flex-shrink:0; }
+.tip-text { font-size:26px; color:#555; line-height:1.5; flex:1; }

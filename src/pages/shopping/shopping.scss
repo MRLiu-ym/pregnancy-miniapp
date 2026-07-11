@@ -1,0 +1,32 @@
+.page { display:flex; flex-direction:column; height:100vh; background:#f8f8f8; }
+
+.progress-bar-wrap { background:#fff; padding:24px; border-bottom:1px solid #f0f0f0; }
+.progress-top { display:flex; justify-content:space-between; margin-bottom:10px; }
+.progress-label { font-size:26px; color:#333; font-weight:600; }
+.progress-num { font-size:24px; color:#F472B6; font-weight:600; }
+.progress-bar { height:10px; background:#f0f0f0; border-radius:5px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg, #F472B6, #EC4899); border-radius:5px; transition:width 0.3s; }
+
+.scroll { flex:1; padding:16px; }
+
+.stage-card { background:#fff; border-radius:20px; margin-bottom:16px; overflow:hidden; }
+.stage-header { display:flex; justify-content:space-between; align-items:center; padding:24px; }
+.stage-left { display:flex; align-items:center; gap:14px; }
+.stage-icon { font-size:32px; }
+.stage-name { font-size:28px; font-weight:600; color:#333; display:block; }
+.stage-count { font-size:22px; color:#999; display:block; margin-top:2px; }
+.stage-arrow { font-size:28px; color:#999; }
+
+.stage-items { border-top:1px solid #f5f5f5; }
+.shop-item { display:flex; gap:14px; padding:18px 24px; align-items:center; border-bottom:1px solid #f9f9f9; }
+.shop-item:last-child { border-bottom:none; }
+.shop-item.checked { background:#F9FAFB; }
+
+.checkbox { width:40px; height:40px; border-radius:10px; border:2px solid #ddd; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.checkbox.checked { background:#F472B6; border-color:#F472B6; }
+.check-mark { color:#fff; font-size:22px; font-weight:bold; }
+
+.item-info { flex:1; }
+.item-name { font-size:26px; color:#333; display:block; }
+.item-name.done { color:#999; text-decoration:line-through; }
+.item-note { font-size:22px; color:#999; display:block; margin-top:4px; }
