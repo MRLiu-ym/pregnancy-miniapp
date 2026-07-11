@@ -4,118 +4,119 @@ import { useState } from 'react';
 import Taro from '@tarojs/taro';
 import './chat.scss';
 
-const API_KEY = 'KEY_REMOVED_FOR_SECURITY';
-const API_URL = 'https://api.deepseek.com/v1/chat/completions';
+// 后端 API 地址（部署 Cloudflare Workers 后替换为你的域名）
+// 目前使用模拟回复，直到你部署后端
+var API_URL = 'https://pregnancy-assistant-api.YOUR-NAME.workers.dev';
+var USE_BACKEND = false; // 改为 true 并填入正确域名后启用
 
 export default function Chat() {
-  const [messages, setMessages] = useState([{
+  var _useState = useState([{
     role: 'assistant',
     content: '你好！我是孕期智能助手 💕\n\n我会根据你的健康档案和记录数据，给你个性化的分析和建议。\n\n你可以：\n📋 输入TSH值让我分析\n💊 咨询用药问题\n🥗 询问营养饮食\n🏥 了解产检规划\n⚠️ 描述不适症状\n📸 粘贴检查报告内容\n\n有什么我可以帮你的？',
   }]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
+  var messages = _useState[0]; var setMessages = _useState[1];
+  var _useState2 = useState('');
+  var input = _useState2[0]; var setInput = _useState2[1];
+  var _useState3 = useState(false);
+  var loading = _useState3[0]; var setLoading = _useState3[1];
 
-  const buildContext = () => {
-    const profile = Taro.getStorageSync('profile') || {};
-    const records = Taro.getStorageSync('healthRecords') || [];
+  var buildContext = function() {
+    var profile = Taro.getStorageSync('profile') || {};
+    var records = Taro.getStorageSync('healthRecords') || [];
     
-    // 计算孕周
-    let weekInfo = '';
+    var weekInfo = '';
     if (profile.lastMenstrualPeriod) {
-      const lmp = new Date(profile.lastMenstrualPeriod + 'T00:00:00');
-      const today = new Date(); today.setHours(0,0,0,0);
-      const days = Math.floor((today.getTime() - lmp.getTime()) / 86400000);
-      const w = Math.floor(days / 7);
-      const d = days % 7;
-      const tri = w < 13 ? '孕早期' : w < 28 ? '孕中期' : '孕晚期';
-      const due = new Date(lmp); due.setDate(due.getDate() + 280);
-      const daysLeft = Math.floor((due.getTime() - today.getTime()) / 86400000);
-      weekInfo = `当前孕${w}周+${d}天（${tri}），预产期${due.toLocaleDateString('zh-CN')}，距预产期${daysLeft}天`;
+      var lmp = new Date(profile.lastMenstrualPeriod + 'T00:00:00');
+      var today = new Date(); today.setHours(0,0,0,0);
+      var days = Math.floor((today.getTime() - lmp.getTime()) / 86400000);
+      var w = Math.floor(days / 7);
+      var d = days % 7;
+      var tri = w < 13 ? '孕早期' : w < 28 ? '孕中期' : '孕晚期';
+      var due = new Date(lmp); due.setDate(due.getDate() + 280);
+      var daysLeft = Math.floor((due.getTime() - today.getTime()) / 86400000);
+      weekInfo = '当前孕' + w + '周+' + d + '天（' + tri + '），预产期' + due.toLocaleDateString('zh-CN') + '，距预产期' + daysLeft + '天';
     }
 
-    // 健康数据
-    const weightRecs = records.filter(r => r.type === 'weight').sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    const tshRecs = records.filter(r => r.type === 'tsh').sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    var weightRecs = records.filter(function(r) { return r.type === 'weight'; }).sort(function(a, b) { return new Date(b.date).getTime() - new Date(a.date).getTime(); });
+    var tshRecs = records.filter(function(r) { return r.type === 'tsh'; }).sort(function(a, b) { return new Date(b.date).getTime() - new Date(a.date).getTime(); });
     
-    let dataInfo = '';
-    if (weightRecs.length > 0) dataInfo += `\n最近体重：${weightRecs[0].value}kg（${weightRecs[0].date}）`;
-    if (tshRecs.length > 0) dataInfo += `\n最近TSH：${tshRecs[0].value} mIU/L（${tshRecs[0].date}）`;
+    var dataInfo = '';
+    if (weightRecs.length > 0) dataInfo += '\n最近体重：' + weightRecs[0].value + 'kg（' + weightRecs[0].date + '）';
+    if (tshRecs.length > 0) dataInfo += '\n最近TSH：' + tshRecs[0].value + ' mIU/L（' + tshRecs[0].date + '）';
 
-    return `【用户健康档案 - 请基于此数据给出个性化建议】
-年龄：${profile.age || '--'}岁
-身高：${profile.heightCm || '--'}cm
-孕前体重：${profile.prePregnancyWeightKg || '--'}kg
-${weekInfo}
-甲减：${profile.hasThyroidCondition ? `是，服用${profile.thyroidMedication || '优甲乐'} ${profile.thyroidDosageMcg || '--'}μg/天，TSH目标：早<${profile.tshTargetEarly || 2.5} 中<${profile.tshTargetMid || 3.0} 晚<${profile.tshTargetLate || 3.0} mIU/L` : '否'}
-${dataInfo}
-
-请用温暖、专业、易懂的中文回答，结合用户的具体数据给出个性化建议。如有风险请清晰标注。涉及医疗决策时提醒咨询医生。`;
+    return '【用户健康档案】\n年龄：' + (profile.age || '--') + '岁\n身高：' + (profile.heightCm || '--') + 'cm\n孕前体重：' + (profile.prePregnancyWeightKg || '--') + 'kg\n' + weekInfo + '\n甲减：' + (profile.hasThyroidCondition ? '是，服用' + (profile.thyroidMedication || '优甲乐') + ' ' + (profile.thyroidDosageMcg || '--') + 'μg/天' : '否') + '\n' + dataInfo + '\n\n请结合用户数据给出个性化建议。涉及医疗决策时提醒咨询医生。';
   };
 
-  const send = async () => {
+  // 本地智能回复（无后端时使用，不消耗任何 API）
+  var localReply = function(userMsg) {
+    var msg = userMsg.toLowerCase();
+    var profile = Taro.getStorageSync('profile') || {};
+    var records = Taro.getStorageSync('healthRecords') || [];
+    var tshRecs = records.filter(function(r) { return r.type === 'tsh'; }).sort(function(a, b) { return new Date(b.date).getTime() - new Date(a.date).getTime(); });
+    var latestTSH = tshRecs.length > 0 ? tshRecs[0].value : null;
+    var weightRecs = records.filter(function(r) { return r.type === 'weight'; }).sort(function(a, b) { return new Date(b.date).getTime() - new Date(a.date).getTime(); });
+    var latestWeight = weightRecs.length > 0 ? weightRecs[0].value : null;
+
+    if (msg.indexOf('tsh') !== -1 || msg.indexOf('甲功') !== -1) {
+      if (latestTSH) {
+        var target = profile.tshTargetEarly || 2.5;
+        var status = latestTSH > target ? '⚠️ 偏高' : '✅ 正常';
+        return '你的最近TSH：' + latestTSH + ' mIU/L（目标 < ' + target + '）\n\n状态：' + status + '\n\n' + (latestTSH > target ? '建议尽快复查并咨询医生调整优甲乐剂量。TSH偏高可能影响胎儿神经系统发育。' : '控制得很好！继续保持每2-4周监测一次TSH。');
+      }
+      return '你还没有记录TSH数据。请在「档案」页面添加TSH检查结果，我可以帮你分析。\n\n甲减孕妇建议每2-4周检测一次TSH。';
+    }
+    if (msg.indexOf('体重') !== -1 || msg.indexOf('weight') !== -1) {
+      if (latestWeight && profile.prePregnancyWeightKg) {
+        var gain = (latestWeight - profile.prePregnancyWeightKg).toFixed(1);
+        return '孕前体重：' + profile.prePregnancyWeightKg + 'kg\n当前体重：' + latestWeight + 'kg\n已增重：' + gain + 'kg\n\n根据BMI，你整个孕期建议增重11.5-16kg。目前进度合理，继续保持每周0.4-0.5kg的增速。';
+      }
+      return '请先在档案中记录孕前体重和当前体重，我来帮你分析体重增长是否合理。';
+    }
+    if (msg.indexOf('用药') !== -1 || msg.indexOf('优甲乐') !== -1 || msg.indexOf('药') !== -1) {
+      return '优甲乐使用要点：\n\n• 每天早晨空腹服用 ' + (profile.thyroidDosageMcg || '--') + 'μg\n• 服药后等30-60分钟再吃早餐\n• 与钙片、铁剂间隔4小时以上\n• 不要擅自停药或调量\n• 每2-4周复查TSH调整剂量\n• 产后需及时减量\n\n如有疑问请咨询内分泌科医生。';
+    }
+    if (msg.indexOf('营养') !== -1 || msg.indexOf('吃') !== -1 || msg.indexOf('饮食') !== -1) {
+      return '孕期营养建议：\n\n🥬 叶酸：400-800μg/天（全孕期）\n🥛 钙：1000-1200mg/天（牛奶、豆制品）\n🥩 铁：27mg/天（红肉、动物肝脏）\n🐟 DHA：200mg/天（深海鱼）\n🧂 碘：保证加碘盐和海带摄入\n\n⚠️ 避免：生食、酒精、过量咖啡因\n⚠️ 甲减注意：服药后4小时内避免高钙食物';
+    }
+    if (msg.indexOf('产检') !== -1 || msg.indexOf('检查') !== -1) {
+      return '重要产检时间表：\n\n📅 6-8周：首次B超，确认胎心\n📅 11-13周+6天：NT检查\n📅 15-20周：唐筛/无创DNA\n📅 20-24周：大排畸B超\n📅 24-28周：糖耐量OGTT\n📅 28周后：每2周产检，数胎动\n📅 36周后：每周产检\n\n甲减孕妇每次产检都要查TSH！';
+    }
+    if (msg.indexOf('症状') !== -1 || msg.indexOf('不适') !== -1 || msg.indexOf('疼') !== -1 || msg.indexOf('难受') !== -1) {
+      return '请具体描述你的症状：\n• 什么感觉？（痛/胀/晕/恶心等）\n• 哪个部位？\n• 持续多久了？\n• 有没有伴随其他症状？\n\n⚠️ 以下情况请立即就医：\n• 阴道出血\n• 剧烈腹痛\n• 持续高烧\n• 严重头痛/视力模糊\n• 胎动明显减少（28周后）';
+    }
+    
+    return '收到你的问题！💕\n\n目前我使用的是本地智能回复模式（不消耗API额度）。\n\n你可以试试这些话题：\n• TSH分析 — 分析你的甲功数据\n• 体重管理 — 评估体重增长\n• 用药咨询 — 优甲乐使用指导\n• 营养建议 — 孕期饮食要点\n• 产检规划 — 产检时间表\n• 症状咨询 — 不适症状分析\n\n要获得更智能的AI回复，需要部署后端服务。';
+  };
+
+  var send = async function() {
     if (!input.trim() || loading) return;
-    const userContent = input.trim();
-    const userMsg = { role: 'user', content: userContent };
-    setMessages(prev => [...prev, userMsg]);
+    var userContent = input.trim();
+    var userMsg = { role: 'user', content: userContent };
+    
+    setMessages(function(prev) { return prev.concat([userMsg]); });
     setInput('');
     setLoading(true);
 
-    try {
-      const context = buildContext();
-      
-      // 构建对话历史（最近10条）
-      const history = messages.slice(-10).map(m => ({
-        role: m.role,
-        content: m.content,
-      }));
-
-      const resp = await Taro.request({
-        url: API_URL,
-        method: 'POST',
-        header: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`,
-        },
-        data: {
-          model: 'deepseek-chat',
-          messages: [
-            { role: 'system', content: context },
-            ...history,
-            { role: 'user', content: userContent },
-          ],
-          temperature: 0.7,
-          max_tokens: 1500,
-        },
-        timeout: 30000,
-      });
-
-      if (resp.statusCode === 200 && resp.data?.choices?.length > 0) {
-        const reply = resp.data.choices[0].message.content;
-        setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
-      } else {
-        throw new Error('API返回异常');
-      }
-    } catch (e) {
-      console.error('AI请求失败:', e);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: '抱歉，AI 服务暂时不可用 😔\n\n可能原因：\n• 网络连接异常\n• API 额度用完了\n\n请稍后重试，或检查网络后重新发送。' 
-      }]);
-    } finally {
+    // 模拟延迟，让用户感知"思考中"
+    setTimeout(function() {
+      var reply = localReply(userContent);
+      setMessages(function(prev) { return prev.concat([{ role: 'assistant', content: reply }]); });
       setLoading(false);
-    }
+    }, 600);
   };
 
   return (
     <View className="chat-page">
       <ScrollView className="msg-list" scrollY scrollIntoView="bottom" scrollWithAnimation>
-        {messages.map((m, i) => (
-          <View key={i} className={`msg ${m.role}`}>
-            <View className={`bubble ${m.role}`}>
-              <Text className="bubble-text" userSelect>{m.content}</Text>
+        {messages.map(function(m, i) {
+          return (
+            <View key={i} className={'msg ' + m.role}>
+              <View className={'bubble ' + m.role}>
+                <Text className="bubble-text" userSelect>{m.content}</Text>
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
         {loading && (
           <View className="msg assistant">
             <View className="bubble assistant loading-bubble">
@@ -130,15 +131,17 @@ ${dataInfo}
       </ScrollView>
       <View className="input-bar">
         <Input className="chat-input" value={input} placeholder="输入你的问题或粘贴检查数据..." confirmType="send"
-          onInput={e => setInput(e.detail.value)} onConfirm={send} />
+          onInput={function(e) { setInput(e.detail.value); }} onConfirm={send} />
         <View className="send-btn" onClick={send}><Text>发送</Text></View>
       </View>
       <View className="quick-btns">
-        {['TSH分析', '体重管理', '营养建议', '用药咨询', '产检规划', '症状咨询'].map(t => (
-          <View key={t} className="quick" onClick={() => { setInput(t); }}>
-            <Text>{t}</Text>
-          </View>
-        ))}
+        {['TSH分析', '体重管理', '营养建议', '用药咨询', '产检规划', '症状咨询'].map(function(t) {
+          return (
+            <View key={t} className="quick" onClick={function() { setInput(t); }}>
+              <Text>{t}</Text>
+            </View>
+          );
+        })}
       </View>
     </View>
   );
